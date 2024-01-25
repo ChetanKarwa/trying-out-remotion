@@ -12,6 +12,7 @@
     "deploy": "node deploy.mjs"
   },
   "dependencies": {
+    "@remotion/animation-utils": "^4.0.97",
     "@remotion/bundler": "4.0.97",
     "@remotion/cli": "4.0.97",
     "@remotion/google-fonts": "4.0.97",
@@ -19,6 +20,7 @@
     "@remotion/paths": "4.0.97",
     "@remotion/player": "4.0.97",
     "@remotion/shapes": "4.0.97",
+    "@remotion/zod-types": "^4.0.97",
     "next": "^13.4.13",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
