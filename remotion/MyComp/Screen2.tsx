@@ -19,6 +19,7 @@ type BarProps = {
   symbol: string;
   rank: number;
   icon: string;
+  totalRanks?: number;
 };
 
 const Row = styled.div`
@@ -69,11 +70,12 @@ export const Bar: React.FC<BarProps> = ({
   symbol,
   rank,
   icon,
+  totalRanks = TOTAL_RANKS,
 }) => {
   const frame = useCurrentFrame();
   const { fps, width } = useVideoConfig();
   const opacity = interpolate(
-    frame - (TOTAL_RANKS - rank) * 3 - 10,
+    frame - (totalRanks - rank) * 3 - 10,
     [0, 12],
     [0, 1]
   );
@@ -224,6 +226,7 @@ function Screen2() {
               symbol={rank.symbol}
               key={rank.color}
               icon={rank.iconUrl}
+              totalRanks={ranking.length}
             />
           );
         })}
