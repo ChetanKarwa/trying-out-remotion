@@ -9,7 +9,7 @@ import {
 } from "remotion";
 import { fontFamily } from "@remotion/google-fonts/ChakraPetch";
 import { PullIn } from "../Effects/PullIn";
-function Screen1({ title }: { title: string }) {
+function Screen1({ count }: { count: number }) {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -26,8 +26,8 @@ function Screen1({ title }: { title: string }) {
     },
   });
 
-  const count = Math.floor(
-    interpolate(frame, [0, 30], [0, parseFloat(title)], {
+  const counter = Math.floor(
+    interpolate(frame, [0, 30], [0, count], {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
     })
@@ -71,7 +71,7 @@ function Screen1({ title }: { title: string }) {
         alignItems: "center",
       }}
     >
-      <div style={counterTextStyle}>{count}</div>
+      <div style={counterTextStyle}>{counter}</div>
       <div style={titleTextStyle}>
         <PullIn
           text="NFT Transfers"

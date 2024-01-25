@@ -1,5 +1,5 @@
 import { makeTransform, scale, translateY } from "@remotion/animation-utils";
-import React from "react";
+import React, { useMemo } from "react";
 import {
   AbsoluteFill,
   Img,
@@ -9,6 +9,8 @@ import {
   useVideoConfig,
 } from "remotion";
 import styled from "styled-components";
+import { TokenProgressChartProps } from "../../types/constants";
+import { z } from "zod";
 
 const TOTAL_RANKS = 5;
 const BAR_HEIGHT = 200;
@@ -19,7 +21,7 @@ type BarProps = {
   symbol: string;
   rank: number;
   icon: string;
-  totalRanks?: number;
+  totalRanks: number;
 };
 
 const Row = styled.div`
@@ -46,7 +48,6 @@ export const BarContainer = styled.div<BarProps>`
     width: ${BAR_HEIGHT / Math.SQRT2}px;
     height: ${BAR_HEIGHT / Math.SQRT2}px;
     background-color: ${(props) => props.color};
-    /* border-radius: ${BAR_HEIGHT / 10}px; */
     transform: rotate(45deg);
     top: ${BAR_HEIGHT / 2 - BAR_HEIGHT / 1.414 / 2}px;
     right: -${BAR_HEIGHT / (2 * Math.SQRT2)}px;
@@ -57,7 +58,6 @@ export const BarContainer = styled.div<BarProps>`
     width: ${BAR_HEIGHT / 1.414}px;
     height: ${BAR_HEIGHT / 1.414}px;
     background-color: ${(props) => props.color};
-    /* border-radius: ${BAR_HEIGHT / 10}px; */
     transform: rotate(45deg);
     top: ${BAR_HEIGHT / 2 - BAR_HEIGHT / 1.414 / 2}px;
     left: -${BAR_HEIGHT / (2 * Math.SQRT2)}px;
@@ -70,12 +70,11 @@ export const Bar: React.FC<BarProps> = ({
   symbol,
   rank,
   icon,
-  totalRanks = TOTAL_RANKS,
 }) => {
   const frame = useCurrentFrame();
   const { fps, width } = useVideoConfig();
   const opacity = interpolate(
-    frame - (totalRanks - rank) * 3 - 10,
+    frame - (TOTAL_RANKS - rank) * 3 - 10,
     [0, 12],
     [0, 1]
   );
@@ -106,6 +105,7 @@ export const Bar: React.FC<BarProps> = ({
   });
   return (
     <Row style={{ width: 2000 }}>
+      {/* @ts-ignore */}
       <BarContainer
         style={{
           opacity,
@@ -147,36 +147,13 @@ export const Bar: React.FC<BarProps> = ({
 const TITLE_OFFSET = 150;
 const FONT_SIZE = 80;
 
-function Screen2() {
+interface IScreen2 {
+  tokenProgressChart: z.infer<typeof TokenProgressChartProps>;
+}
+function Screen2({ tokenProgressChart }: IScreen2) {
   const frame = useCurrentFrame();
   const { width, fps, height } = useVideoConfig();
-  const ranking = [
-    {
-      color: "#b2fef5",
-      iconUrl: "https://s2.coinmarketcap.com/static/img/coins/128x128/1.png",
-      symbol: "BTC",
-    },
-    {
-      color: "#d5f772",
-      iconUrl: "https://s2.coinmarketcap.com/static/img/coins/128x128/1027.png",
-      symbol: "ETH",
-    },
-    {
-      color: "#f7f772",
-      iconUrl: "https://s2.coinmarketcap.com/static/img/coins/128x128/825.png",
-      symbol: "USDT",
-    },
-    {
-      color: "#4e00f9",
-      iconUrl: "https://s2.coinmarketcap.com/static/img/coins/128x128/1839.png",
-      symbol: "BNB",
-    },
-    {
-      color: "#0e0e0e",
-      iconUrl: "https://s2.coinmarketcap.com/static/img/coins/128x128/5426.png",
-      symbol: "SOL",
-    },
-  ];
+  const ranking = [...tokenProgressChart.token];
 
   const titleOpacity = spring({
     frame,
@@ -198,6 +175,12 @@ function Screen2() {
     [height / 2 - TITLE_OFFSET - FONT_SIZE, 0]
   );
 
+  const filteredRanking = useMemo(
+    () =>
+      ranking.filter((token) => token.color && token.imageURL && token.symbol),
+    [ranking]
+  );
+
   return (
     <AbsoluteFill>
       <AbsoluteFill
@@ -217,7 +200,7 @@ function Screen2() {
         >
           Most transferred tokens
         </div>
-        {ranking.map((rank, i) => {
+        {filteredRanking.map((rank, i) => {
           return (
             <Bar
               color={rank.color}
@@ -225,8 +208,8 @@ function Screen2() {
               rank={i + 1}
               symbol={rank.symbol}
               key={rank.color}
-              icon={rank.iconUrl}
-              totalRanks={ranking.length}
+              icon={rank.imageURL}
+              totalRanks={filteredRanking.length}
             />
           );
         })}

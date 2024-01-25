@@ -4,6 +4,7 @@ const textarea: React.CSSProperties = {
   resize: "none",
   lineHeight: 1.7,
   display: "block",
+  width: "100%",
   borderRadius: "var(--geist-border-radius)",
   backgroundColor: "var(--background)",
   padding: "var(--geist-half-pad)",
@@ -11,24 +12,26 @@ const textarea: React.CSSProperties = {
   fontSize: 14,
 };
 
-export const Input: React.FC<{
-  text: string;
-  setText: (newText: string) => void;
+export const NumberInput: React.FC<{
+  number: number;
+  setNumber: (newNumber: number) => void;
   disabled?: boolean;
-}> = ({ text, setText, disabled }) => {
+}> = ({ number, setNumber, disabled }) => {
   const onChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
     (e) => {
-      setText(e.currentTarget.value);
+      setNumber(parseInt(e.currentTarget.value));
     },
-    [setText]
+    [setNumber]
   );
 
   return (
     <input
+      type="number"
       disabled={disabled}
+      placeholder="Count"
       name="title"
       style={textarea}
-      value={text}
+      value={number}
       onChange={onChange}
     />
   );

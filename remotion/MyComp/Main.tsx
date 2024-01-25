@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { AbsoluteFill, Sequence } from "remotion";
-import { CompositionProps } from "../../types/constants";
+import { TokenProgressChartProps } from "../../types/constants";
 import { loadFont, fontFamily } from "@remotion/google-fonts/ChakraPetch";
 import React from "react";
 
@@ -14,15 +14,17 @@ const container: React.CSSProperties = {
   fontFamily,
 };
 
-export const Main = ({ title }: z.infer<typeof CompositionProps>) => {
+export const Main = (
+  tokenProgressChart: z.infer<typeof TokenProgressChartProps>
+) => {
   const screen1Duration = 75;
   return (
     <AbsoluteFill style={container}>
       <Sequence durationInFrames={screen1Duration}>
-        <Screen1 title={title} />
+        <Screen1 count={tokenProgressChart.count} />
       </Sequence>
       <Sequence from={screen1Duration} durationInFrames={240}>
-        <Screen2 />
+        <Screen2 tokenProgressChart={tokenProgressChart} />
       </Sequence>
     </AbsoluteFill>
   );

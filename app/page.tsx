@@ -5,8 +5,8 @@ import type { NextPage } from "next";
 import React, { useMemo, useState } from "react";
 import { Main } from "../remotion/MyComp/Main";
 import {
-  CompositionProps,
-  defaultMyCompProps,
+  TokenProgressChartProps,
+  defaultTokenProgressChart,
   DURATION_IN_FRAMES,
   VIDEO_FPS,
   VIDEO_HEIGHT,
@@ -38,13 +38,13 @@ const player: React.CSSProperties = {
 };
 
 const Home: NextPage = () => {
-  const [text, setText] = useState<string>(defaultMyCompProps.title);
+  const [tokenProgressChart, setTokenProgressChart] = useState(
+    defaultTokenProgressChart
+  );
 
-  const inputProps: z.infer<typeof CompositionProps> = useMemo(() => {
-    return {
-      title: text,
-    };
-  }, [text]);
+  const inputProps: z.infer<typeof TokenProgressChartProps> = useMemo(() => {
+    return tokenProgressChart;
+  }, [tokenProgressChart]);
 
   return (
     <div>
@@ -64,8 +64,8 @@ const Home: NextPage = () => {
           />
         </div>
         <RenderControls
-          text={text}
-          setText={setText}
+          tokenProgressChart={tokenProgressChart}
+          setTokenProgressChart={setTokenProgressChart}
           inputProps={inputProps}
         ></RenderControls>
       </div>
