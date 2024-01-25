@@ -1,7 +1,7 @@
 import React from "react";
 import { z } from "zod";
 import { zColor } from "@remotion/zod-types";
-import { Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { Easing, interpolate, useCurrentFrame } from "remotion";
 
 function splitStringWithSpaces(string: string): string[] {
   const result: string[] = [];

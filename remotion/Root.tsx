@@ -2,7 +2,7 @@ import { Composition } from "remotion";
 import { Main } from "./MyComp/Main";
 import {
   COMP_NAME,
-  defaultMyCompProps,
+  defaultTokenProgressChart,
   DURATION_IN_FRAMES,
   VIDEO_FPS,
   VIDEO_HEIGHT,
@@ -18,7 +18,7 @@ export const RemotionRoot: React.FC = () => {
       fps={VIDEO_FPS}
       width={VIDEO_WIDTH}
       height={VIDEO_HEIGHT}
-      defaultProps={defaultMyCompProps}
+      defaultProps={defaultTokenProgressChart}
     />
   );
 };

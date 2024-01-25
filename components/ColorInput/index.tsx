@@ -1,5 +1,5 @@
 import { HexColorPicker } from "react-colorful";
-import React, { RefObject, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   ColorInputComponent,
   ColorInputWrapper,

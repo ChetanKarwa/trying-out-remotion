@@ -1,4 +1,4 @@
-import { makeTransform, scale, translateY } from "@remotion/animation-utils";
+import { makeTransform, translateY } from "@remotion/animation-utils";
 import React, { useMemo } from "react";
 import {
   AbsoluteFill,
@@ -153,7 +153,7 @@ interface IScreen2 {
 function Screen2({ tokenProgressChart }: IScreen2) {
   const frame = useCurrentFrame();
   const { width, fps, height } = useVideoConfig();
-  const ranking = [...tokenProgressChart.token];
+  const ranking = tokenProgressChart.token;
 
   const titleOpacity = spring({
     frame,
