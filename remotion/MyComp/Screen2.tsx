@@ -37,9 +37,7 @@ export const BarContainer = styled.div<BarProps>`
   height: ${BAR_HEIGHT}px;
   background-color: ${(props) => props.color};
   margin-top: 10px;
-  /* box-shadow: 0 0 3px rgba(0, 0, 0, 0.3); */
   position: relative;
-  /* border-radius: ${BAR_HEIGHT / 10}px; */
   transform: translateX(${BAR_HEIGHT / 2}px);
   &::after {
     content: "";

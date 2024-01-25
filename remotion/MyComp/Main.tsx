@@ -15,7 +15,7 @@ const container: React.CSSProperties = {
 };
 
 export const Main = ({ title }: z.infer<typeof CompositionProps>) => {
-  const screen1Duration = 60;
+  const screen1Duration = 75;
   return (
     <AbsoluteFill style={container}>
       <Sequence durationInFrames={screen1Duration}>
@@ -24,17 +24,6 @@ export const Main = ({ title }: z.infer<typeof CompositionProps>) => {
       <Sequence from={screen1Duration} durationInFrames={240}>
         <Screen2 />
       </Sequence>
-      {/* <Sequence durationInFrames={transitionStart + transitionDuration}>
-        <Rings outProgress={logoOut}></Rings>
-        <AbsoluteFill style={logo}>
-          <NextLogo outProgress={logoOut}></NextLogo>
-        </AbsoluteFill>
-      </Sequence> */}
-      {/* <Sequence from={transitionStart + transitionDuration / 2}>
-        <TextFade>
-          <h1 style={titleStyle}>{title}</h1>
-        </TextFade>
-      </Sequence> */}
     </AbsoluteFill>
   );
 };
