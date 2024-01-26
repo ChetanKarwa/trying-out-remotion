@@ -9,8 +9,13 @@ import {
 } from "remotion";
 import { fontFamily } from "@remotion/google-fonts/ChakraPetch";
 import { PullIn } from "../Effects/PullIn";
-
-function Screen1({ count }: { count: number }) {
+function Screen1({
+  count,
+  counterText,
+}: {
+  count: number;
+  counterText: string;
+}) {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -75,7 +80,7 @@ function Screen1({ count }: { count: number }) {
       <div style={counterTextStyle}>{counter}</div>
       <div style={titleTextStyle}>
         <PullIn
-          text="NFT Transfers"
+          text={counterText}
           fontFamily={fontFamily}
           fontSize={120}
           color="black"

@@ -21,7 +21,10 @@ export const Main = (
   return (
     <AbsoluteFill style={container}>
       <Sequence durationInFrames={screen1Duration}>
-        <Screen1 count={tokenProgressChart.count} />
+        <Screen1
+          count={tokenProgressChart.counterNumber}
+          counterText={tokenProgressChart.counterTitle}
+        />
       </Sequence>
       <Sequence from={screen1Duration} durationInFrames={240}>
         <Screen2 tokenProgressChart={tokenProgressChart} />

@@ -154,7 +154,7 @@ interface IScreen2 {
 function Screen2({ tokenProgressChart }: IScreen2) {
   const frame = useCurrentFrame();
   const { width, fps, height } = useVideoConfig();
-  const ranking = tokenProgressChart.token;
+  const ranking = tokenProgressChart.leaderboardEntries;
 
   const titleOpacity = spring({
     frame,
@@ -178,7 +178,7 @@ function Screen2({ tokenProgressChart }: IScreen2) {
 
   const filteredRanking = useMemo(
     () =>
-      ranking.filter((token) => token.color && token.imageURL && token.symbol),
+      ranking.filter((token) => token.color && token.iconUrl && token.symbol),
     [ranking]
   );
 
@@ -204,20 +204,19 @@ function Screen2({ tokenProgressChart }: IScreen2) {
             fontSize: 80,
             textAlign: "center",
             marginBottom: 80,
-            color: "white",
           }}
         >
-          Most transferred tokens
+          {tokenProgressChart.leaderboardTitle}
         </div>
         {filteredRanking.map((rank, i) => {
           return (
             <Bar
               color={rank.color}
-              endWidth={width / 2 - 70 * (i + 1) - 40}
+              endWidth={width / 2 - 80 * i}
               rank={i + 1}
               symbol={rank.symbol}
               key={rank.color}
-              icon={rank.imageURL}
+              icon={rank.iconUrl}
               totalRanks={filteredRanking.length}
             />
           );

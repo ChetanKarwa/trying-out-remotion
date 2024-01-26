@@ -32,30 +32,55 @@ export const RenderControls: React.FC<{
           {/* <NumberInput number={}/> */}
           <NumberInput
             disabled={state.status === "invoking"}
-            number={tokenProgressChart.count}
+            number={tokenProgressChart.counterNumber}
             setNumber={(newCount) => {
               setTokenProgressChart({
                 ...tokenProgressChart,
-                count: newCount,
+                counterNumber: newCount,
               });
             }}
           ></NumberInput>
           <Spacing></Spacing>
-          {tokenProgressChart.token.map((token, index) => (
+          <Input
+            disabled={state.status === "invoking"}
+            text={tokenProgressChart.counterTitle}
+            placeholder="Counter title"
+            setText={(newText) => {
+              setTokenProgressChart({
+                ...tokenProgressChart,
+                counterTitle: newText,
+              });
+            }}
+          ></Input>
+          <Spacing></Spacing>
+          <Input
+            placeholder="Leaderboard title"
+            disabled={state.status === "invoking"}
+            text={tokenProgressChart.leaderboardTitle}
+            setText={(newText) => {
+              setTokenProgressChart({
+                ...tokenProgressChart,
+                leaderboardTitle: newText,
+              });
+            }}
+          ></Input>
+          <Spacing></Spacing>
+          {tokenProgressChart.leaderboardEntries.map((token, index) => (
             <InputWrapperComponent key={index}>
               <Input
                 disabled={state.status === "invoking"}
-                text={token.imageURL}
+                text={token.iconUrl}
+                placeholder="Icon URL"
                 setText={(newText) => {
                   setTokenProgressChart({
                     ...tokenProgressChart,
-                    token: [
-                      ...tokenProgressChart.token.slice(0, index),
+                    leaderboardEntries: [
+                      ...tokenProgressChart.leaderboardEntries.slice(0, index),
                       {
                         ...token,
-                        imageURL: newText,
+                        iconUrl: newText,
                       },
-                      ...tokenProgressChart.token.slice(index + 1),
+                      ...tokenProgressChart.leaderboardEntries.slice(index + 1),
                     ],
                   });
                 }}
@@ -63,16 +88,17 @@ export const RenderControls: React.FC<{
               <Input
                 disabled={state.status === "invoking"}
                 text={token.symbol}
+                placeholder="Symbol"
                 setText={(newText) => {
                   setTokenProgressChart({
                     ...tokenProgressChart,
-                    token: [
-                      ...tokenProgressChart.token.slice(0, index),
+                    leaderboardEntries: [
+                      ...tokenProgressChart.leaderboardEntries.slice(0, index),
                       {
                         ...token,
                         symbol: newText,
                       },
-                      ...tokenProgressChart.token.slice(index + 1),
+                      ...tokenProgressChart.leaderboardEntries.slice(index + 1),
                     ],
                   });
                 }}
@@ -83,13 +109,13 @@ export const RenderControls: React.FC<{
                 setColor={(newColor) => {
                   setTokenProgressChart({
                     ...tokenProgressChart,
-                    token: [
-                      ...tokenProgressChart.token.slice(0, index),
+                    leaderboardEntries: [
+                      ...tokenProgressChart.leaderboardEntries.slice(0, index),
                       {
                         ...token,
                         color: newColor,
                       },
-                      ...tokenProgressChart.token.slice(index + 1),
+                      ...tokenProgressChart.leaderboardEntries.slice(index + 1),
                     ],
                   });
                 }}

@@ -15,7 +15,8 @@ export const Input: React.FC<{
   text: string;
   setText: (newText: string) => void;
   disabled?: boolean;
-}> = ({ text, setText, disabled }) => {
+  placeholder: string;
+}> = ({ text, setText, disabled, placeholder }) => {
   const onChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
     (e) => {
       setText(e.currentTarget.value);
@@ -26,6 +27,7 @@ export const Input: React.FC<{
   return (
     <input
       disabled={disabled}
+      placeholder={placeholder}
       name="title"
       style={textarea}
       value={text}
