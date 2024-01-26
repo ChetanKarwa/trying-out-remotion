@@ -4,6 +4,7 @@ import {
   AbsoluteFill,
   Img,
   interpolate,
+  interpolateColors,
   spring,
   useCurrentFrame,
   useVideoConfig,
@@ -88,7 +89,7 @@ export const Bar: React.FC<BarProps> = ({
   const animatedWidth = interpolate(
     animatedWidthProgress,
     [0, 1],
-    [0, endWidth + 100]
+    [0, endWidth]
   );
   const left = interpolate(
     animatedWidthProgress,
@@ -114,7 +115,7 @@ export const Bar: React.FC<BarProps> = ({
         }}
         color={color}
       />
-      <div style={{ width: 40 }} />
+      <div style={{ width: 120 }} />
       <div
         style={{
           opacity: labelProgress,
@@ -128,7 +129,7 @@ export const Bar: React.FC<BarProps> = ({
           alignItems: "center",
           gap: 20,
           fontSize: 40,
-          color: "black",
+          color: "white",
           fontWeight: "400",
           letterSpacing: 2,
         }}
@@ -181,6 +182,12 @@ function Screen2({ tokenProgressChart }: IScreen2) {
     [ranking]
   );
 
+  const backgroundColor = interpolateColors(
+    titleOpacity,
+    [0, 1],
+    ["white", "black"]
+  );
+
   return (
     <AbsoluteFill>
       <AbsoluteFill
@@ -188,6 +195,7 @@ function Screen2({ tokenProgressChart }: IScreen2) {
           transform: makeTransform([translateY(titlePosition)]),
           justifyContent: "center",
           gap: 20,
+          backgroundColor,
         }}
       >
         <div
@@ -196,6 +204,7 @@ function Screen2({ tokenProgressChart }: IScreen2) {
             fontSize: 80,
             textAlign: "center",
             marginBottom: 80,
+            color: "white",
           }}
         >
           Most transferred tokens
@@ -204,7 +213,7 @@ function Screen2({ tokenProgressChart }: IScreen2) {
           return (
             <Bar
               color={rank.color}
-              endWidth={width / 2 - 80 * i}
+              endWidth={width / 2 - 80 * i - 40}
               rank={i + 1}
               symbol={rank.symbol}
               key={rank.color}

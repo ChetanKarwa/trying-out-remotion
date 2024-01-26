@@ -9,6 +9,7 @@ import {
 } from "remotion";
 import { fontFamily } from "@remotion/google-fonts/ChakraPetch";
 import { PullIn } from "../Effects/PullIn";
+
 function Screen1({ count }: { count: number }) {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();

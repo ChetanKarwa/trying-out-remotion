@@ -10,9 +10,12 @@ export const TokenProgressChartProps = z.object({
       imageURL: z.string().url(),
     })
   ),
+  duration: z.number().int().min(1),
 });
 
-export const defaultTokenProgressChart: z.infer<typeof TokenProgressChartProps> = {
+export const defaultTokenProgressChart: z.infer<
+  typeof TokenProgressChartProps
+> = {
   count: 1700,
   token: [
     {
@@ -44,6 +47,7 @@ export const defaultTokenProgressChart: z.infer<typeof TokenProgressChartProps> 
       symbol: "SOL",
     },
   ],
+  duration: 800,
 };
 
 export const DURATION_IN_FRAMES = 300;
