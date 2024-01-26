@@ -20,15 +20,27 @@ export const Main = (
   const screen1Duration = 75;
   return (
     <AbsoluteFill style={container}>
-      <Sequence durationInFrames={screen1Duration}>
-        <Screen1
-          count={tokenProgressChart.counterNumber}
-          counterText={tokenProgressChart.counterTitle}
-        />
-      </Sequence>
-      <Sequence from={screen1Duration} durationInFrames={240}>
-        <Screen2 tokenProgressChart={tokenProgressChart} />
-      </Sequence>
+      {tokenProgressChart.screens.map((screenData, index) => (
+        <>
+          <Sequence
+            from={index * tokenProgressChart.durationOfEachSegment}
+            durationInFrames={screen1Duration}
+          >
+            <Screen1
+              count={screenData.counterNumber}
+              counterText={screenData.counterTitle}
+            />
+          </Sequence>
+          <Sequence
+            from={
+              index * tokenProgressChart.durationOfEachSegment + screen1Duration
+            }
+            durationInFrames={240}
+          >
+            <Screen2 tokenProgressChart={screenData} />
+          </Sequence>
+        </>
+      ))}
     </AbsoluteFill>
   );
 };

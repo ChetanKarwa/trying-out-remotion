@@ -3,7 +3,6 @@ import { Main } from "./MyComp/Main";
 import {
   COMP_NAME,
   defaultTokenProgressChart,
-  DURATION_IN_FRAMES,
   TokenProgressChartProps,
   VIDEO_FPS,
   VIDEO_HEIGHT,
@@ -13,10 +12,11 @@ import { z } from "zod";
 
 const calculateMetadata: CalculateMetadataFunction<
   z.infer<typeof TokenProgressChartProps>
-> = ({ props, defaultProps, abortSignal }) => {
+> = ({ props }) => {
+  const totalDuration = props.durationOfEachSegment * props.screens.length;
   return {
     // Change the metadata
-    durationInFrames: props.duration || defaultProps.duration,
+    durationInFrames: totalDuration,
     // or transform some props
     props,
     // or add per-composition default codec

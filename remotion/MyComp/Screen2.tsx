@@ -10,7 +10,7 @@ import {
   useVideoConfig,
 } from "remotion";
 import styled from "styled-components";
-import { TokenProgressChartProps } from "../../types/constants";
+import { ScreenDataProps } from "../../types/constants";
 import { z } from "zod";
 
 const TOTAL_RANKS = 5;
@@ -149,7 +149,7 @@ const TITLE_OFFSET = 150;
 const FONT_SIZE = 80;
 
 interface IScreen2 {
-  tokenProgressChart: z.infer<typeof TokenProgressChartProps>;
+  tokenProgressChart: z.infer<typeof ScreenDataProps>;
 }
 function Screen2({ tokenProgressChart }: IScreen2) {
   const frame = useCurrentFrame();
@@ -204,6 +204,7 @@ function Screen2({ tokenProgressChart }: IScreen2) {
             fontSize: 80,
             textAlign: "center",
             marginBottom: 80,
+            color: "white",
           }}
         >
           {tokenProgressChart.leaderboardTitle}

@@ -7,7 +7,6 @@ import { Main } from "../remotion/MyComp/Main";
 import {
   TokenProgressChartProps,
   defaultTokenProgressChart,
-  DURATION_IN_FRAMES,
   VIDEO_FPS,
   VIDEO_HEIGHT,
   VIDEO_WIDTH,
@@ -51,7 +50,9 @@ const Home: NextPage = () => {
           <Player
             component={Main}
             inputProps={inputProps}
-            durationInFrames={inputProps.duration}
+            durationInFrames={
+              inputProps.durationOfEachSegment * inputProps.screens.length
+            }
             fps={VIDEO_FPS}
             compositionHeight={VIDEO_HEIGHT}
             compositionWidth={VIDEO_WIDTH}
