@@ -213,7 +213,7 @@ function Screen2({ tokenProgressChart }: IScreen2) {
           return (
             <Bar
               color={rank.color}
-              endWidth={width / 2 - 80 * i - 40}
+              endWidth={width / 2 - 70 * (i + 1) - 40}
               rank={i + 1}
               symbol={rank.symbol}
               key={rank.color}
